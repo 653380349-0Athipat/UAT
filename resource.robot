@@ -15,17 +15,16 @@ ${VALID PASSWORD}    mode
 ${LOGIN URL}      http://${SERVER}/
 ${WELCOME URL}    http://${SERVER}/welcome.html
 ${ERROR URL}      http://${SERVER}/error.html
-${CHROME_BROWSER_PATH}    /Users/atiearth/University/3term2/SoftwareEngineering/Lab7/WebDemo/ChromeForTesting/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing
-${CHROME_DRIVER_PATH}    /Users/atiearth/University/3term2/SoftwareEngineering/Lab7/WebDemo/ChromeForTesting/chromedriver
+${CHROME_BROWSER_PATH}    /usr/bin/chromium
+${CHROME_DRIVER_PATH}    /usr/bin/chromedriver
 
 *** Keywords ***
 Open Browser To Login Page
     ${chrome_options}    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
-	${chrome_options.binary_location}     Set Variable    ${CHROME_BROWSER_PATH}
-	${service}    Evaluate    sys.modules["selenium.webdriver.chrome.service"].Service(executable_path=r"${CHROME_DRIVER_PATH}") 
-	# [selenium >= 4.10] chrome_options change to options
-	Create Webdriver    Chrome    options=${chrome_options}    service=${service}
-	Go To    ${LOGIN URL}
+    ${chrome_options.binary_location}    Set Variable    ${CHROME_BROWSER_PATH}
+    ${service}    Evaluate    sys.modules["selenium.webdriver.chrome.service"].Service(executable_path=r"${CHROME_DRIVER_PATH}") 
+    Create Webdriver    Chrome    options=${chrome_options}    service=${service}
+    Go To    ${LOGIN URL}
 
 Login Page Should Be Open
     Title Should Be    Login Page
