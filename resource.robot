@@ -22,6 +22,7 @@ ${CHROME_DRIVER_PATH}    /usr/bin/chromedriver
 Open Browser To Login Page
     ${chrome_options}    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys
     ${chrome_options.binary_location}    Set Variable    ${CHROME_BROWSER_PATH}
+    ${chrome_options.add_argument("--user-data-dir=/tmp/chrome-data-${/}session-${/}${RANDOM}")}    
     ${service}    Evaluate    sys.modules["selenium.webdriver.chrome.service"].Service(executable_path=r"${CHROME_DRIVER_PATH}") 
     Create Webdriver    Chrome    options=${chrome_options}    service=${service}
     Go To    ${LOGIN URL}
